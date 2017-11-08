@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Tic Tac Toe</title>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<link type='text/css' rel='stylesheet' href='css/styles.css'>
+	</head>
+	<body>
+
+		<div class='game-container'>
+			<h1>Tic Tac Toe</h1>
+
+			<div id='question1' class='game-setup'>
+				<p>Welcome to the game. Choose 'One Player' to play against me (the computer), or 'Two Players' to play against one another.</p>
+				<div class='buttons' >
+					<button class='button' id='one-player'>One Player</button>
+					<button class='button' id='two-players'>Two Players</button>
+				</div>
+			</div> <!-- close question 1 -->
+
+			<div id='question2' class='game-setup question2'>
+				<p>Would you like to be X or O?</p>
+				<div class='buttons'>
+					<button class='button' id='onePlayerX'>X</button>
+					<button class='button' id='onePlayerO'>O</button>
+				</div>
+
+			</div> <!-- close question 2 -->
+
+			<div id='question3' class='game-setup question3'>
+				<p>Player 1- Would you like to be X or O?</p>
+				<div class='buttons'>
+					<button class='button' id='twoPlayersX'>X</button>
+					<button class='button' id='twoPlayersO'>O</button>
+				</div>
+
+			</div> <!-- close question 3 -->
+
+			<div class='ihavenoidea'><button class='button back-button'>&larr; Back</button></div>
+
+			<div id='display-turn' class='display-turn'>
+				<div id='player1'><span id='player1-span'>Player 1</span><br><span id='player1-marker'></span></div>
+
+				<div id='winner-restart-quit'>
+					<div id='who-goes-first'><span id='first-turn-prompt'>Click the button to randomly determine who will go first.</span><span id='first-turn-result'></span><button class='button who-goes-first-button' id='who-goes-first-button'>Who goes first?</button></div>
+
+					<div id='quit-game'>
+						<button class='button' id='quit-button'>Quit</button>
+					</div>
+
+					<div id='display-winner'>
+					</div>
+				</div>
+
+				<div id='player2'><span id='player2-span'></span><br><span id='player2-marker'></span></div>
+			</div>
+
+			<div id='game-board' class='game-board'>
+				<div class='flex border-right border-bottom'></div>
+				<div class='flex border-right border-bottom'></div>
+				<div class='flex border-bottom'></div>
+				<div class='flex border-right border-bottom'></div>
+				<div class='flex border-right border-bottom'></div>
+				<div class='flex border-bottom'></div>
+				<div class='flex border-right'></div>
+				<div class='flex border-right'></div>
+				<div class='flex'></div>
+			</div>
+
+		</div> <!-- close game container -->
+
+		<script src='js/main.js'></script>
+	</body>
+</html>
