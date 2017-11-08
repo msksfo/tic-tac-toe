@@ -108,7 +108,8 @@ firstTurn.addEventListener('click', function(){
 
 	if (number === 0){
 		firstTurnResult.innerHTML = 'Player 1 will go first';
-		player1.style.backgroundColor = 'pink';
+		player1.style.backgroundColor = '#e56e94';
+		player1.style.color = 'white';
 		currentlyPlaying = player1Marker;
 		setTimeout(function(){
 			gameBoard.style.display = 'grid';
@@ -116,14 +117,20 @@ firstTurn.addEventListener('click', function(){
 	} else {
 		if (player2Span.innerHTML ==='Computer'){
 			firstTurnResult.innerHTML = 'The computer will go first';
-			player2.style.backgroundColor = 'pink';
+			player2.style.backgroundColor = '#e56e94';
+			player2.style.color = 'white';
 			currentlyPlaying = player2Marker;
 			setTimeout(function(){
 				gameBoard.style.display = 'grid';
-			}, 1000)
+			}, 1000);
+
+			setTimeout(function(){
+				computerPlay();
+			}, 1500);
 		} else {
 			firstTurnResult.innerHTML = 'Player 2 will go first';
-			player2.style.backgroundColor = 'pink';
+			player2.style.backgroundColor = '#e56e94';
+			player2.style.color = 'white';
 			currentlyPlaying = player2Marker;
 			setTimeout(function(){
 				gameBoard.style.display = 'grid';
@@ -158,20 +165,23 @@ quitGameButton.addEventListener('click', function(){
 				if ( checkForWinner() ){
 					quitGameDiv.style.display = 'none';
 					document.getElementById('display-winner').innerHTML = 'Player 1 has won the game.';
-					//isPlaying = false;
 					playAgain();
 				} else if( checkForDraw() ){
 					quitGameDiv.style.display = 'none';
 					document.getElementById('display-winner').innerHTML = 'The game was a draw.';
-					//isPlaying = false;
 					playAgain();
 				} else {
 					player1.style.backgroundColor = '#dbeae5';
+					player1.style.color = '#3d3c3a';
 					currentlyPlaying = player2Marker;
-					player2.style.backgroundColor = 'pink';
-					setTimeout(function(){
-						computerPlay();
-					}, 1000);
+					player2.style.backgroundColor = '#e56e94';
+					player2.style.color = 'white';
+
+					if (player2Span.innerHTML === 'Computer'){
+						setTimeout(function(){
+							computerPlay();
+						}, 1000);
+					}
 				}
 
 			} else {
@@ -186,24 +196,23 @@ quitGameButton.addEventListener('click', function(){
 					if (player2Span.innerHTML === 'Computer'){
 						quitGameDiv.style.display = 'none';
 						document.getElementById('display-winner').innerHTML = 'The computer has won the game.';
-						//isPlaying = false;
 						playAgain();
 					} else {
 						quitGameDiv.style.display = 'none';
 						document.getElementById('display-winner').innerHTML = 'Player 2 has won the game.';
-						//isPlaying = false;
 						playAgain();
 					}
 					
 				} else if( checkForDraw() ){
 					quitGameDiv.style.display = 'none';
 					document.getElementById('display-winner').innerHTML = 'The game was a draw.';
-					//isPlaying = false;
 					playAgain();
 				} else {
 					player2.style.backgroundColor = '#dbeae5';
+					player2.style.color = '#3d3c3a';
 					currentlyPlaying = player1Marker;
-					player1.style.backgroundColor = 'pink';
+					player1.style.backgroundColor = '#e56e94';
+					player1.style.color = 'white';
 				}
 				
 			} else {
@@ -217,10 +226,12 @@ quitGameButton.addEventListener('click', function(){
 function resetPlayer1(){
 	player1Marker.innerHTML = '';
 	player1.style.backgroundColor = '#dbeae5';
+	player1.style.color = '#3d3c3a';
 }
 
 function resetPlayer2(){
 	player2.style.backgroundColor = '#dbeae5';
+	player2.style.color = '#3d3c3a';
 	player2Span.innerHTML = '';
 	player2Marker.innerHTML = '';
 }
@@ -228,7 +239,9 @@ function resetPlayer2(){
 function resetGameBoard(){
 	resetPlayer1();
 	resetPlayer2();
+
 	document.getElementById('display-winner').innerHTML = '';
+
 	whoGoesFirst.style.display = 'block';
 	firstTurnPrompt.innerHTML = 'Click the button to randomly determine who will go first.';
 	firstTurn.style.display = 'inline-block';
@@ -239,6 +252,7 @@ function resetGame(){
 
 	for (var i = 0; i < gameBoard.children.length; i++){
 		gameBoard.children[i].innerHTML = '';
+		gameBoard.children[i].style.backgroundColor = '#fbeee6';
 	}
 
 	gameBoard.style.display = 'none';
@@ -257,6 +271,7 @@ function computerPlay(){
 }
 
 function checkForDraw(){
+
 	for (var i = 0; i < gameBoard.children.length; i++){
 		if(gameBoard.children[i].innerHTML === ''){
 			return false;
@@ -271,20 +286,28 @@ function checkForWinner(){
 	var winner = false;
 
 	if ((children[0].innerHTML === 'X' && children[1].innerHTML === 'X' && children[2].innerHTML === 'X') || (children[0].innerHTML === 'O' && children[1].innerHTML === 'O' && children[2].innerHTML === 'O')){
+		highlightWinner(0, 1, 2);
 		winner = true;
 	} else if ((children[3].innerHTML === 'X' && children[4].innerHTML === 'X' && children[5].innerHTML === 'X') || (children[3].innerHTML === 'O' && children[4].innerHTML === 'O' && children[5].innerHTML === 'O')){
+		highlightWinner(3, 4, 5);
 		winner = true;
 	} else if ((children[6].innerHTML === 'X' && children[7].innerHTML === 'X' && children[8].innerHTML === 'X') || (children[6].innerHTML === 'O' && children[7].innerHTML === 'O' && children[8].innerHTML === 'O')){
+		highlightWinner(6, 7, 8);
 		winner = true;
 	} else if ((children[0].innerHTML === 'X' && children[3].innerHTML === 'X' && children[6].innerHTML === 'X') || (children[0].innerHTML === 'O' && children[3].innerHTML === 'O' && children[6].innerHTML === 'O')){
+		highlightWinner(0, 3, 6);
 		winner = true;
 	} else if ((children[1].innerHTML === 'X' && children[4].innerHTML === 'X' && children[7].innerHTML === 'X') || (children[1].innerHTML === 'O' && children[4].innerHTML === 'O' && children[7].innerHTML === 'O')){
+		highlightWinner(1, 4, 7);
 		winner = true;
 	} else if ((children[2].innerHTML === 'X' && children[5].innerHTML === 'X' && children[8].innerHTML === 'X') || (children[2].innerHTML === 'O' && children[5].innerHTML === 'O' && children[8].innerHTML === 'O')){
+		highlightWinner(2, 5, 8);
 		winner = true;
 	} else if ((children[0].innerHTML === 'X' && children[4].innerHTML === 'X' && children[8].innerHTML === 'X') || (children[0].innerHTML === 'O' && children[4].innerHTML === 'O' && children[8].innerHTML === 'O')){
+		highlightWinner(0, 4, 8);
 		winner = true;
 	} else if ((children[2].innerHTML === 'X' && children[4].innerHTML === 'X' && children[6].innerHTML === 'X') || (children[2].innerHTML === 'O' && children[4].innerHTML === 'O' && children[6].innerHTML === 'O')){
+		highlightWinner(2, 4, 6);
 		winner = true;
 	}
 	return winner;
@@ -297,13 +320,17 @@ function playAgain(){
 	}, 5000)
 }
 
-function playGame(){
-	
+function highlightWinner(x, y, z){
+	gameBoard.children[x].style.backgroundColor = '#dd4374';
+	gameBoard.children[y].style.backgroundColor = '#dd4374';
+	gameBoard.children[z].style.backgroundColor = '#dd4374';
 }
 
-
-
-
+function resetWinner(){
+	for (var i = 0; i < gameBoard.children.length; i++){
+		gameBoard.children[i].style.backgroundColor = '#dbeae5;';
+	}
+}
 
 
 

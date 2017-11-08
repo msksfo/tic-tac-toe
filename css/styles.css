@@ -11,9 +11,8 @@ body {
 
 .game-container {
 	background-color: #dbeae5;
-
+	width: 100%;
 	border: 4px double purple;
-	width: 40%;
 	height: 80%;
 	padding: 1.5rem;
 	font-size: 1.2rem;
@@ -147,7 +146,19 @@ div.buttons {
 	display: none;
 }
 
+/* ===================================== Media Queries ===================================*/
 
+@media all and (min-width: 700px){
+	.game-container {
+		width: 60%;
+	}
+}
+
+@media all and (min-width: 950px){
+	.game-container {
+		width: 40%;
+	}
+}
 
 
 
